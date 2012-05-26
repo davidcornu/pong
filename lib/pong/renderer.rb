@@ -15,11 +15,7 @@ module Pong
 
       while true do
         ball.move!(@frame)
-        input = get_input
-        direction = :up   if input == 'w'
-        direction = :down if input == 's'
-        puts direction.to_s
-        paddle.move!(@frame, direction)
+        paddle.move!(@frame, get_input)
         direction = :none
         render(ball, paddle)
         sleep 0.05
@@ -46,11 +42,21 @@ module Pong
     def get_input
       begin
         system("stty raw -echo")
-        str = STDIN.getc
+        begin
+          case STDIN.read_nonblock(1)
+          when 'w'
+            :up
+          when 's'
+            :down
+          else
+            :none
+          end
+        rescue Errno::EAGAIN
+          :none
+        end
       ensure
         system("stty -raw echo")
       end
-      str.chr
     end
   end
 end
