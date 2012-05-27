@@ -77,7 +77,7 @@ module Pong
 
     def footer
       text = " " + (message.length > 0 ? message : 'Pong')
-      ["\x1b[7m", text, (1..width - text.length - 1).map{' '}.join(''), "\033[0m"].join('')
+      ["\n", "\x1b[7m", text, (1..width - text.length - 1).map{' '}.join(''), "\033[0m"].join('')
     end
   end
 end
