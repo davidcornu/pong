@@ -22,9 +22,11 @@ module Pong
           @frame.message = 'You lose!'
           clear
           print @frame.output
+          sleep 2
           break
+        else
+          sleep 0.05
         end
-        sleep 0.05
       end
     end
 
