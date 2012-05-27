@@ -1,12 +1,16 @@
 module Pong
   class Ball < Thing
+
     def initialize
       self.sprite = [['o']]
+      self.x = 2
+      self.y = 2
       super
     end
 
     def move!(frame)
-      bounce!(collisions(frame)) unless within_bounds?(frame, next_position)
+      collisions = frame.collisions(self)
+      bounce!(collisions) unless collisions.size == 0
       self.x, self.y = next_position
       return self
     end
