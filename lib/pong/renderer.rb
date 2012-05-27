@@ -4,7 +4,7 @@ module Pong
 
     def initialize
       self.screen_width  = `tput cols`.to_i
-      self.screen_height = `tput lines`.to_i - 1
+      self.screen_height = `tput lines`.to_i
       @frame = new_frame
     end
 

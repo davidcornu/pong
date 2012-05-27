@@ -3,7 +3,7 @@ module Pong
     attr_accessor :width, :height, :pixels, :objects, :message
 
     def initialize(width, height)
-      self.width, self.height = width, height
+      self.width, self.height = width, height - 1
       self.build_pixels
       self.message = ''
       self.objects = []
