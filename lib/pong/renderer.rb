@@ -14,10 +14,16 @@ module Pong
       direction = :none
 
       while true do
-        ball.move!(@frame)
         paddle.move!(@frame, get_input)
         direction = :none
+        ball.move!(@frame)
         render(ball, paddle)
+        if @frame.boundary_collisions(ball).include?(:left)
+          @frame.message = 'You lose!'
+          clear
+          print @frame.output
+          break
+        end
         sleep 0.05
       end
     end
@@ -32,7 +38,8 @@ module Pong
     end
 
     def clear
-      print "\e[2J\e[f"
+      print "\033[;H"
+      print "\033[2J"
     end
 
     def new_frame
