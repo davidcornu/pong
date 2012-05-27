@@ -3,8 +3,6 @@ module Pong
     attr_accessor :x, :y, :width, :height, :vector, :sprite
 
     def initialize
-      self.x = 1
-      self.y = 1
       self.vector = [1,1]
       workout_dimensions
     end
@@ -21,7 +19,7 @@ module Pong
     end
 
     def workout_dimensions
-      self.width, self.height = sprite.max_by(&:length), sprite.size
+      self.width, self.height = sprite.max_by(&:length).size, sprite.size
     end
 
     private
@@ -34,16 +32,6 @@ module Pong
         coords[0] <= frame.width,
         coords[1] <= frame.height
       ].all?
-    end
-
-    def collisions(frame, coords = nil)
-      coords ||= [self.x, self.y]
-      collisions = []
-      collisions << :left   if coords[0] == 1
-      collisions << :right  if coords[0] == frame.width
-      collisions << :bottom if coords[1] == 1
-      collisions << :top    if coords[1] == frame.height
-      return collisions
     end
   end
 end
